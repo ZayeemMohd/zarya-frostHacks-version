@@ -15,6 +15,7 @@ import Profile from "../pages/Profile";
 import Home from "../pages/Home.jsx";
 import AboutUs from "../pages/AboutUs.jsx";
 import WhyZarya from "../pages/WhyZarya.jsx";
+import completedProfiles from "../pages/completedProfiles.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <Protected authentication={false}>
             <Signup />
+          </Protected>
+        ),
+      },
+      {
+        path: "/completedProfiles",
+        element: (
+          <Protected authentication={true}>
+            <completedProfiles />
           </Protected>
         ),
       },

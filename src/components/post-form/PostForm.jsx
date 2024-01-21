@@ -3,56 +3,60 @@ import { useForm } from "react-hook-form";
 
 import Button from "../Button";
 import Input from "../Input";
-import Select from "../Select"
+import Select from "../Select";
 
 import appwriteService from "../../appwrite/config";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 
 function PostForm({ post }) {
-  const { register, handleSubmit, watch, setValue, getValues } =
-    useForm({
-      defaultValues: {
-        need: post?.need || "",
-        slug: post?.slug || "",
-        contact: post?.contact || "",
-        status: post?.status || "active",
-        name: post?.name || "",
-        address: post?.address || "",
-        naya: post?.naya || ""
-      },
-    });
+  const { register, handleSubmit, watch, setValue, getValues } = useForm({
+    defaultValues: {
+      need: post?.need || "",
+      slug: post?.slug || "",
+      contact: post?.contact || "",
+      status: post?.status || "active",
+      name: post?.name || "",
+      address: post?.address || "",
+      naya: post?.naya || "",
+    },
+  });
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
-    if(post){
-        const file = data.image[0] ? await appwriteService.updateProfile(data.image[0]) : null
+    if (post) {
+      const file = data.image[0]
+        ? await appwriteService.updateProfile(data.image[0])
+        : null;
 
-        if(file){
-            appwriteService.deleteFile(post.profileImage)
-        }
-        const dbPost = await appwriteService.updateProfile(post.$id, {
-            ...data,
-            profileImage: file ? file.$id: undefined
-        })
+      if (file) {
+        appwriteService.deleteFile(post.profileImage);
+      }
+      const dbPost = await appwriteService.updateProfile(post.$id, {
+        ...data,
+        profileImage: file ? file.$id : undefined,
+      });
 
-        if(dbPost){
-            navigate(`/post/${dbPost.$id}`)
-        }
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
     } else {
-        const file = await appwriteService.uploadFile(data.image[0])
-        if(file){
-            const fileId = file.$id
-            data.profileImage = fileId
-            const dbPost = await appwriteService.createProfile({...data, userId: userData.$id})
+      const file = await appwriteService.uploadFile(data.image[0]);
+      if (file) {
+        const fileId = file.$id;
+        data.profileImage = fileId;
+        const dbPost = await appwriteService.createProfile({
+          ...data,
+          userId: userData.$id,
+        });
 
-            if(dbPost){
-                navigate(`/post/${dbPost.$id}`)
-            }
+        if (dbPost) {
+          navigate(`/post/${dbPost.$id}`);
         }
+      }
     }
   };
 
@@ -77,7 +81,7 @@ function PostForm({ post }) {
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
-          label="need"
+          label="Need"
           placeholder="need"
           className="mb-4"
           {...register("need", { required: true })}
@@ -94,7 +98,7 @@ function PostForm({ post }) {
           className="mb-4"
           {...register("address", { required: true })}
         />
-        
+
         <Input
           label="Contact"
           placeholder="Contact"
@@ -107,7 +111,7 @@ function PostForm({ post }) {
           className="mb-4"
           {...register("naya", { required: true })}
         />
-        
+
         <Input
           label="Slug :"
           placeholder="Slug"

@@ -16,11 +16,11 @@ function Header(props) {
       slug: "/",
       active: true,
     },
-    {
-      name: "Completed Profiles",
-      slug: "/completedProfiles",
-      active: authStatus,
-    },
+    // {
+    //   name: "Completed Profiles",
+    //   slug: "/completedProfiles",
+    //   active: authStatus,
+    // },
     {
       name: "Login",
       slug: "/login",
