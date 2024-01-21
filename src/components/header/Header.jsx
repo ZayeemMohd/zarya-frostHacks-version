@@ -17,14 +17,9 @@ function Header(props) {
       active: true,
     },
     {
-      name: "About Us",
-      slug: "/",
-      active: true,
-    },
-    {
       name: "Completed Profiles",
-      slug: "/",
-      active: true,
+      slug: "/completedProfiles",
+      active: authStatus,
     },
     {
       name: "Login",

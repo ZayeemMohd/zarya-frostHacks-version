@@ -6,6 +6,8 @@ import ProfileCard from "../components/container/ProfileCard";
 
 function AllProfiles(props) {
   const [posts, setPosts] = useState([]);
+
+
   useEffect(() => {
     appwriteService.getProfile([]).then((posts) => {
       if (posts) {
@@ -13,6 +15,8 @@ function AllProfiles(props) {
       }
     });
   }, []);
+
+  
   return (
     <div className="w-full py-8">
       <Container>

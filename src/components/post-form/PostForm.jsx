@@ -14,12 +14,13 @@ function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, getValues } =
     useForm({
       defaultValues: {
-        title: post?.title || "",
+        need: post?.need || "",
         slug: post?.slug || "",
         contact: post?.contact || "",
         status: post?.status || "active",
         name: post?.name || "",
         address: post?.address || "",
+        naya: post?.naya || ""
       },
     });
 
@@ -66,8 +67,8 @@ function PostForm({ post }) {
 
   React.useEffect(() => {
     watch((value, { name }) => {
-      if (name === "title") {
-        setValue("slug", slugTransform(value.title), { shouldValidate: true });
+      if (name === "need") {
+        setValue("slug", slugTransform(value.need), { shouldValidate: true });
       }
     });
   }, [watch, slugTransform, setValue]);
@@ -76,10 +77,10 @@ function PostForm({ post }) {
     <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
       <div className="w-2/3 px-2">
         <Input
-          label="Title"
-          placeholder="Title"
+          label="need"
+          placeholder="need"
           className="mb-4"
-          {...register("title", { required: true })}
+          {...register("need", { required: true })}
         />
         <Input
           label="Name"
@@ -99,6 +100,12 @@ function PostForm({ post }) {
           placeholder="Contact"
           className="mb-4"
           {...register("contact", { required: true })}
+        />
+        <Input
+          label="naya"
+          placeholder="nayaS"
+          className="mb-4"
+          {...register("naya", { required: true })}
         />
         
         <Input

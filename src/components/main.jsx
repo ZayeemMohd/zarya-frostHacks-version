@@ -13,6 +13,8 @@ import AddProfile from "../pages/AddProfile";
 import EditProfile from "../pages/EditProfile";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home.jsx";
+import AboutUs from "../pages/AboutUs.jsx";
+import WhyZarya from "../pages/WhyZarya.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,22 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      // {
+      //   path: "/aboutus",
+      //   element: (
+      //     <Protected authentication={false}>
+      //       <AboutUs />
+      //     </Protected>
+      //   ),
+      // },
+      // {
+      //   path: "/whyzarya",
+      //   element: (
+      //     <Protected authentication={false}>
+      //       <WhyZarya />
+      //     </Protected>
+      //   ),
+      // },
       {
         path: "/login",
         element: (

@@ -5,6 +5,8 @@ import { login, logout } from "../store/authSlice";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import authService from "../appwrite/auth";
+import WhyZarya from "../pages/WhyZarya";
+import AboutUs from "../pages/AboutUs";
 // import Logo from "../assets/zarya.png"
 
 function App() {
@@ -22,17 +24,15 @@ function App() {
   }, [dispatch]);
 
   return !loading ? (
-    <div className="min-h-screen flex flex-wrap content-between bg-white">
+    <>
       <div className="w-full h-screen">
         <Header />
         <main className="w-100vw h-100vh">
           <Outlet />
+          <Footer />
         </main>
       </div>
-      <div className="w-full block">
-        <Footer />
-      </div>
-    </div>
+    </>
   ) : null;
 }
 
